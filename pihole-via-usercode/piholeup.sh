@@ -9,7 +9,6 @@ cat <<'EOF' > $PIHOLE_DIR"/detect_ip.sh"
 #!/bin/bash
 # borrowed from https://raw.githubusercontent.com/pi-hole/pi-hole/master/automated%20install/basic-install.sh
 route=$(ip route get 8.8.8.8)
-IPv4dev=$(awk '{for (i=1; i<=NF; i++) if ($i~/dev/) print $(i+1)}' <<< "${route}")
 IPv4bare=$(awk '{print $7}' <<< "${route}")
 IPV4_ADDRESS=$(ip -o -f inet addr show | grep "${IPv4bare}" |  awk '{print $4}' | awk 'END {print}')
 echo $IPV4_ADDRESS
