@@ -67,5 +67,5 @@ echo "running the pihole unattended setup script"
 echo "------------------------------"
 curl -sSL https://install.pi-hole.net > /tmp/piholesetup.sh
 chmod +x /tmp/piholesetup.sh
-/tmp/piholesetup.sh --unattended
+script -qfc "/tmp/piholesetup.sh --unattended" /tmp/piholesetup.log
 echo "------------------------------"
