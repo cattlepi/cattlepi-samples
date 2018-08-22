@@ -7,6 +7,7 @@ mkdir -p $PIHOLE_DIR
 # script used to detect the ip
 cat <<'EOF' > $PIHOLE_DIR"/detect_ip.sh"
 #!/bin/bash
+# borrowed from https://raw.githubusercontent.com/pi-hole/pi-hole/master/automated%20install/basic-install.sh
 route=$(ip route get 8.8.8.8)
 IPv4dev=$(awk '{for (i=1; i<=NF; i++) if ($i~/dev/) print $(i+1)}' <<< "${route}")
 IPv4bare=$(awk '{print $7}' <<< "${route}")
@@ -18,6 +19,7 @@ chmod a+x $PIHOLE_DIR"/detect_ip.sh"
 # script used to detect the network
 cat <<'EOF' > $PIHOLE_DIR"/detect_network.sh"
 #!/bin/bash
+# borrowed from https://raw.githubusercontent.com/pi-hole/pi-hole/master/automated%20install/basic-install.sh
 echo $(ip --oneline link show up | grep -v "lo" | grep -v "wlan" | awk '{print $2}' | cut -d':' -f1 | cut -d'@' -f1 | head -1)
 EOF
 chmod a+x $PIHOLE_DIR"/detect_network.sh"
@@ -48,11 +50,17 @@ QUERY_LOGGING=true
 INSTALL_WEB_SERVER=true
 INSTALL_WEB_INTERFACE=true
 LIGHTTPD_ENABLED=true
-WEBPASSWORD=f8e65f4be87d281b7d9fd0cb7a541182b60ce02bca8f70b5ae909c65e81ebde9
+WEBPASSWORD=4b20c060f40545f80ab87081c3c91842b8c30a2ea7c9b2f4ee9094b70c96fd61
 EOF
 echo $PIHOLE_DIR"/setupVars.conf" 
 echo "------------------------------"
 cat $PIHOLE_DIR"/setupVars.conf"
+echo "------------------------------"
+
+echo "open the firewall to enable needed pihole ports"
+echo "------------------------------"
+ufw allow dns
+ufw allow http
 echo "------------------------------"
 
 # run the installer script
