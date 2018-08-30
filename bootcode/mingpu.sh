@@ -1,4 +1,3 @@
-#!/bin/bash
 echo "setting up the GPU to use the minimum ammount of memory"
 echo "------------------------------"
 CONFIG_TXT=/boot/config.txt
