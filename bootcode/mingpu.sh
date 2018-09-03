@@ -1,4 +1,5 @@
 #!/bin/sh
+# used in https://cattlepi.com/2018/08/28/hacking-bootcode.html
 echo "setting up the GPU to use the minimum ammount of memory"
 echo "------------------------------"
 CONFIG_TXT=/boot/config.txt

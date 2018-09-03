@@ -1,4 +1,5 @@
 #!/bin/bash
+# use in https://cattlepi.com/2018/08/21/pihole-and-usercode.html
 echo "setting up pihole via usercode"
 echo "------------------------------"
 PIHOLE_DIR=/etc/pihole
